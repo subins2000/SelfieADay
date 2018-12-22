@@ -29,3 +29,13 @@ I'm gonna add [this sound](https://www.youtube.com/watch?v=ll4nzRteZQQ) to the v
 ```
 cat aligned/*.jpg | ffmpeg -f image2pipe -r 10 -vcodec mjpeg -i - -i sound.mp3 -shortest out.mp4
 ```
+
+### Reduce Video Size
+
+[Source](https://unix.stackexchange.com/a/447521/60785) :
+
+```
+ffmpeg -i input.mkv -vf "scale=iw/2:ih/2" half_the_frame_size.mkv
+ffmpeg -i input.mkv -vf "scale=iw/3:ih/3" a_third_the_frame_size.mkv
+ffmpeg -i input.mkv -vf "scale=iw/4:ih/4" a_fourth_the_frame_size.mkv
+```
