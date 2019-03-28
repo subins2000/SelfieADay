@@ -1,10 +1,12 @@
 # SelfieADay
 
-My "selfie a day" hobby files
+My "selfie a day" hobby files.
+
+This is a fork of a [fork](https://github.com/iomihai/photo-a-day-aligner).
 
 ## Requirements
 
-* The awesome [Photo A Day Aligner](https://github.com/matthewearl/photo-a-day-aligner) tool
+* Download [this file](http://sourceforge.net/projects/dclib/files/dlib/v18.10/shape_predictor_68_face_landmarks.dat.bz2) and save it as `shape_predictor_68_face_landmarks.dat`
 
 ## Run
 
