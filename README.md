@@ -39,3 +39,7 @@ ffmpeg -i input.mkv -vf "scale=iw/2:ih/2" half_the_frame_size.mkv
 ffmpeg -i input.mkv -vf "scale=iw/3:ih/3" a_third_the_frame_size.mkv
 ffmpeg -i input.mkv -vf "scale=iw/4:ih/4" a_fourth_the_frame_size.mkv
 ```
+
+## LICENSES
+
+* [Matthew Earl's Photo-a-day aligner](https://github.com/matthewearl/photo-a-day-aligner/blob/master/LICENSE)
