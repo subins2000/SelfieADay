@@ -41,5 +41,7 @@ for file in files:
     # Resize images
 
     im = Image.open(new_name)
+    exif = im.info['exif']
+    
     imResize = make_square(im)
-    imResize.save(new_name, 'JPEG', quality=100)
+    imResize.save(new_name, 'JPEG', quality=100, exif=exif)
