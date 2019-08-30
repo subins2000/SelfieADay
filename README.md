@@ -2,7 +2,7 @@
 
 My "selfie a day" hobby files.
 
-This is a fork of a [fork](https://github.com/iomihai/photo-a-day-aligner).
+This is a fork of a [fork](https://github.com/iomihai/photo-a-day-aligner) of a [fork](https://github.com/jccroft1/photo-a-day-aligner).
 
 ## Requirements
 
