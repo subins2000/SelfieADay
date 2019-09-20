@@ -4,11 +4,32 @@ My "selfie a day" hobby files.
 
 This is a fork of a [fork](https://github.com/iomihai/photo-a-day-aligner) of a [fork](https://github.com/jccroft1/photo-a-day-aligner).
 
-## Requirements
+## What is Selfie A Day ?
 
-* Download [this file](http://sourceforge.net/projects/dclib/files/dlib/v18.10/shape_predictor_68_face_landmarks.dat.bz2) and save it as `shape_predictor_68_face_landmarks.dat`
+It's a hobby where a person takes a selfie (photo of him/her) everyday. After a period (years), the pictures are joined to make a timelapse video. The pictures are joined in such a way that the face is centered.
 
-## Run
+[Example video : Hugo Cornellier's AGE 12 to MARRIED](https://www.youtube.com/watch?v=65nfbW-27ps)
+
+### Why ?
+
+For fun ! Also, it's a lazy way to make a journal.
+
+A picture tells a thousand words eh ? You can figure out the place you where, people you were with and how things were.
+
+This repo contains scripts, instructions to manage your own selfie a day project.
+
+## Managing Pictures
+
+* Make a dedicated folder in your phone to store the pics. Make sure the date is correct and pictures have the correct EXIF date. It would be great if the filename contains the date captured. If the folder name is something like `0PSAD`, it will show up first because of the number at beginning.
+* Periodically copy this folder from phone to your computer.
+
+## Making Video
+
+### Requirements
+
+* The awesome [Photo A Day Aligner](https://github.com/matthewearl/photo-a-day-aligner) tool
+
+### Run
 
 * Copy pictures to `input` folder
 * Run `make-input.py`. This'll resize every images in `input` folder to a square which [solves this](https://github.com/matthewearl/photo-a-day-aligner/issues/1)
@@ -16,7 +37,7 @@ This is a fork of a [fork](https://github.com/iomihai/photo-a-day-aligner) of a 
 * Run :
   ```python3 pada.py align```
 
-## Making Video
+### Video
 
 Use `ffmpeg` for making the video from images in `output` folder. Change `fps` according to your need using `-r` flag :
 
@@ -24,7 +45,7 @@ Use `ffmpeg` for making the video from images in `output` folder. Change `fps` a
 cat aligned/*.jpg | ffmpeg -f image2pipe -r 20 -vcodec mjpeg -i - -vcodec libx264 out.mp4
 ```
 
-### Sound
+#### Sound
 
 I'm gonna add [this sound](https://www.youtube.com/watch?v=ll4nzRteZQQ) to the video. Sound file name is `sound.mp3` :
 
@@ -32,7 +53,7 @@ I'm gonna add [this sound](https://www.youtube.com/watch?v=ll4nzRteZQQ) to the v
 cat aligned/*.jpg | ffmpeg -f image2pipe -r 10 -vcodec mjpeg -i - -i sound.mp3 -shortest out.mp4
 ```
 
-### Reduce Video Size
+#### Reduce Video Size
 
 [Source](https://unix.stackexchange.com/a/447521/60785) :
 
