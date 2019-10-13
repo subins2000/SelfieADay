@@ -10,6 +10,8 @@ It's a hobby where a person takes a selfie (photo of him/her) everyday. After a 
 
 [Example video : Hugo Cornellier's AGE 12 to MARRIED](https://www.youtube.com/watch?v=65nfbW-27ps)
 
+There's also a [Reddit community](https://www.reddit.com/r/selfieaday/) for this hobbyists.
+
 ### Why ?
 
 For fun ! Also, it's a lazy way to make a journal.
