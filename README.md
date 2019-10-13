@@ -31,6 +31,15 @@ This repo contains scripts, instructions to manage your own selfie a day project
 
 ### Run
 
+* Clone/download this repo
+* Download [shape_predictor_68_face_landmarks.dat](https://sourceforge.net/projects/dclib/files/dlib/v18.10/shape_predictor_68_face_landmarks.dat.bz2) and place it in the cloned repo folder
+* Install dependencies :
+  ```
+  pip3 install wheel
+  pip3 install dlib
+  pip3 install scipy
+  pip3 install exifread python-resize-image
+  ```
 * Copy pictures to `input` folder
 * Run `make-input.py`. This'll resize every images in `input` folder to a square which [solves this](https://github.com/matthewearl/photo-a-day-aligner/issues/1)
 * Edit `pada.conf` according to your need
@@ -62,6 +71,12 @@ ffmpeg -i input.mkv -vf "scale=iw/2:ih/2" half_the_frame_size.mkv
 ffmpeg -i input.mkv -vf "scale=iw/3:ih/3" a_third_the_frame_size.mkv
 ffmpeg -i input.mkv -vf "scale=iw/4:ih/4" a_fourth_the_frame_size.mkv
 ```
+
+## TODO
+
+* Align to the right face in pictures with multiple faces
+* Make it faster
+* Make the PADA script work for all image resolutions (eliminate `make-input.py`)
 
 ## LICENSES
 
