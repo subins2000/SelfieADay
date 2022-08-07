@@ -24,6 +24,11 @@ This repo contains scripts, instructions to manage your own selfie a day project
 
 * Make a dedicated folder in your phone to store the pics. Make sure the date is correct and pictures have the correct EXIF date. It would be great if the filename contains the date captured. If the folder name is something like `0PSAD`, it will show up first because of the number at beginning.
 * Periodically copy this folder from phone to your computer.
+* Back it up to a cloud. What I do is take the pictures in the order of their date, split it into 100, zip it and upload. Usage :
+```bash
+mkdir compressed
+python3 split-into-chunks.py 0PSAD compressed
+```
 
 ## Making Video
 
