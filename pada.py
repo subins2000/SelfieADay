@@ -141,7 +141,7 @@ if __name__ == "__main__":
     # Execute the command by deferring to the appopriate module.
     landmark_finder = pada.landmarks.LandmarkFinder(
         os.path.expanduser(cfg['predictor_path']),
-        os.path.expanduser(cfg['single_picture'])
+        os.path.expanduser(cfg['single_image'])
     )
     if cli_args.cmd == "align":
         pada.align.align_images(
