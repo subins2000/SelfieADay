@@ -34,4 +34,4 @@ import logging
 LOGGER_NAME = "pada"
 
 logger = logging.getLogger(LOGGER_NAME)
-
+logger.setLevel(logging.DEBUG)

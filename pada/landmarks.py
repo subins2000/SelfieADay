@@ -28,8 +28,10 @@ __all__ = (
 
 import cv2
 import dlib
+import face_recognition
 import numpy
 import logging
+import tempfile
 
 
 class NoFaces(Exception):
@@ -37,19 +39,28 @@ class NoFaces(Exception):
 
 
 class LandmarkFinder(object):
-    def __init__(self, predictor_path):
+    def __init__(self, predictor_path, single_image = None):
         self.detector = dlib.get_frontal_face_detector()
         self.predictor = dlib.shape_predictor(str(predictor_path))
+        if single_image == None:
+            self.single_image_face_encodings = None
+        else:
+            image = face_recognition.load_image_file(single_image)
+            self.single_image_face_encodings = face_recognition.face_encodings(image)[0]
 
     def get(self, im):
         rects = self.detector(im, 1)
         
         if len(rects) > 1:
-            logging.info("Too many faces, picking largest")
-            sizes = []
-            for k, d in enumerate(rects):
-                sizes.append(abs(d.top()-d.bottom())*abs(d.left()-d.right()))
-            rects[0] = rects[sizes.index(max(sizes))]
+            rect = self.get_recognized_face_from_multiple_faces(im, rects)
+            if rect != None:
+                rects[0] = rect
+            else:
+                logging.info("Couldn't recognize face, picking largest")
+                sizes = []
+                for k, d in enumerate(rects):
+                    sizes.append(abs(d.top()-d.bottom())*abs(d.left()-d.right()))
+                rects[0] = rects[sizes.index(max(sizes))]
             
         if len(rects) == 0:
             raise NoFaces
@@ -57,6 +68,41 @@ class LandmarkFinder(object):
         return numpy.matrix([[p.x, p.y]
                                 for p in self.predictor(im, rects[0]).parts()])
 
+    def get_recognized_face_from_multiple_faces(self, im, rects):
+        if type(self.single_image_face_encodings) == type(None):
+            return None
+
+        i = 0
+        for k, d in enumerate(rects):
+            rect = rects[i]
+            file = tempfile.NamedTemporaryFile(suffix=".jpg")
+            face_file = file.name
+
+            crop = im[d.top():d.bottom(), d.left():d.right()]
+            cv2.imwrite(face_file, crop)
+
+            face_image = face_recognition.load_image_file(face_file)
+            face_encoding = face_recognition.face_encodings(face_image)[0]
+
+            known_face_encodings = [self.single_image_face_encodings]
+            matches = face_recognition.compare_faces(
+                known_face_encodings,
+                face_encoding
+            )
+            if True in matches:
+                return rect
+
+            face_distances = face_recognition.face_distance(
+                known_face_encodings,
+                face_encoding
+            )
+            best_match_index = numpy.argmin(face_distances)
+            if matches[best_match_index]:
+                return rect
+
+            i += 1
+        
+        return None
 
 def draw_convex_hull(im, points, color):
     points = cv2.convexHull(points)
